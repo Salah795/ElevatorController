@@ -7,7 +7,6 @@
 
 #include <queue>
 #include <vector>
-#include <functional>
 #include <unordered_map>
 #include <condition_variable>
 #include <thread>
