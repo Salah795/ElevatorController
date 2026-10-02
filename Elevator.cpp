@@ -32,5 +32,31 @@ void Elevator::add_destination(int floor_number, bool inside, Direction directio
 }
 
 void Elevator::run() {
-    
+    while (true) {
+        std::unique_lock<std::mutex> lock(this->data_mutex);
+        this->request_available.wait(lock, [&]{return !this->floors_map.empty();});
+        int next_floor = this->floors_priority.top().floor;
+        this->floors_priority.pop();
+        if (this->floors_map.find(next_floor) != this->floors_map.end()) {
+            const int current_floor = Hardware::GetCurrentElevatorFloor();
+            if (next_floor - current_floor > 0) {
+                this->current_direction = Direction::UP;
+            }
+            else {
+                this->current_direction = Direction::DOWN;
+            }
+
+            for (int floor = current_floor; floor != next_floor; floor += static_cast<int>(this->current_direction)) {
+                if ((this->floors_map.find(floor) != this->floors_map.end()) &&
+                    (this->floors_map[floor].direction == this->current_direction)) {
+                    this->floors_map.erase(floor);
+                    this->people_number += Hardware::GoToFloor(floor);
+                }
+            }
+
+            this->floors_map.erase(next_floor);
+            this->people_number += Hardware::GoToFloor(next_floor);
+            lock.unlock();
+        }
+    }
 }

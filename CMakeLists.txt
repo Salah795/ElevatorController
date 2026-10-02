@@ -9,4 +9,6 @@ add_executable(ElevatorController
         Elevator.cpp
         Elevator.h
         Hardware.cpp
-        Hardware.h)
+        Hardware.h
+        Floor.cpp
+        Floor.h)
