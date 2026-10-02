@@ -11,4 +11,6 @@ add_executable(ElevatorController
         Hardware.cpp
         Hardware.h
         Floor.cpp
-        Floor.h)
+        Floor.h
+        ElevatorSystem.cpp
+        ElevatorSystem.h)
