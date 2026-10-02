@@ -4,7 +4,7 @@
 
 #include "Elevator.h"
 
-void Elevator::add_destination(int floor_number, bool inside, Direction direction) {
+void Elevator::add_destination(const int floor_number, const bool inside, const Direction direction) {
     this->data_mutex.lock();
 
     if (this->floors_map.find(floor_number) != this->floors_map.end()) {

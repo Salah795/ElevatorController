@@ -4,9 +4,24 @@
 
 #ifndef ELEVATORCONTROLLER_FLOOR_H
 #define ELEVATORCONTROLLER_FLOOR_H
+#include "Elevator.h"
 
 
 class Floor {
+private:
+    bool up_flag;
+    bool down_flag;
+    const int number;
+    std::thread worker;
+    Elevator& elevator;
+    std::mutex buttons_mutex;
+    std::condition_variable elevator_required;
+
+public:
+    Floor(const int floor_number, Elevator& elevator):
+    up_flag(false), down_flag(false), number(floor_number), elevator(elevator) {}
+    void start() {this->worker = std::thread(&Floor::run, this);}
+    void run();
 };
 
 
