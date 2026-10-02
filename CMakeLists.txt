@@ -7,4 +7,6 @@ include_directories(.)
 
 add_executable(ElevatorController
         Elevator.cpp
-        Elevator.h)
+        Elevator.h
+        Hardware.cpp
+        Hardware.h)
