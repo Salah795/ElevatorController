@@ -7,13 +7,18 @@
 #include "Elevator.h"
 #include "Floor.h"
 
-
+// TODO SHOULD RECHECK THIS CLASS AND EVERYTHING RELATED TO IT.
 class ElevatorSystem {
     Elevator elevator;
     std::vector<std::unique_ptr<Floor>> floors;
+    explicit ElevatorSystem(int floors_number);
 
 public:
-    explicit ElevatorSystem(int floors_number);
+    ElevatorSystem(const ElevatorSystem&) = delete;
+    ElevatorSystem& operator=(const ElevatorSystem&) = delete;
+    ElevatorSystem(ElevatorSystem&&) = delete;
+    ElevatorSystem& operator=(ElevatorSystem&&) = delete;
+    static ElevatorSystem& getInstance(int floors_number);
     void start();
 };
 

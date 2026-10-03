@@ -11,6 +11,11 @@ ElevatorSystem::ElevatorSystem(const int floors_number) {
     }
 }
 
+ElevatorSystem& ElevatorSystem::getInstance(const int floors_number) {
+    static ElevatorSystem instance(floors_number);
+    return instance;
+}
+
 void ElevatorSystem::start() {
     this->elevator.start();
     for (const auto & floor : this->floors) {

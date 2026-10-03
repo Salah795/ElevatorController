@@ -241,3 +241,17 @@ requests and is asynchronously notified when a new request is added.
 
 # How would change your solution if there are two elevators in the building?
 
+I would change the ElevatorSystem class to manage multiple elevators instead of a single elevator. 
+The ElevatorSystem would be implemented as a Singleton so that there is only one central controller 
+responsible for all elevators and floors.
+The system would contain two Elevator objects, each with its own worker thread and request queue. 
+The Floor objects would send their requests to the ElevatorSystem instead of directly to a specific elevator.
+
+When an external request is received, the ElevatorSystem would select the most suitable elevator based on factors 
+such as whether the elevator is free, its current floor, and its current direction. In particular, 
+a free elevator that is closest to the requested floor would normally be selected.
+After selecting an elevator, the request would be assigned to that elevator, which would then process it using the same
+request-priority and movement logic as in the single-elevator solution.
+
+The Hardware interface would also be modified to support multiple elevators. Hardware functions would receive the 
+elevator ID so that the system can control the correct elevator.
