@@ -28,6 +28,7 @@ public:
     ElevatorSystem& operator=(const ElevatorSystem&) = delete;
     ElevatorSystem(ElevatorSystem&&) = delete;
     ElevatorSystem& operator=(ElevatorSystem&&) = delete;
+
     static ElevatorSystem& getInstance(int floors_number);
     void start();
 };
