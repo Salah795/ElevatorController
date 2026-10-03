@@ -42,13 +42,13 @@ struct ComparePriority {
      */
 
     bool operator() (const Request& first_request, const Request& second_request) const {
-        if (first_request.time < 0 && second_request.time > 0) {
+        if (first_request.time > 0 && second_request.time < 0) {
             return true;
         }
 
         if ((first_request.time < 0 && second_request.time < 0) ||
             (first_request.time > 0 && second_request.time > 0)) {
-            return abs(first_request.time) < abs(second_request.time);
+            return abs(first_request.time) > abs(second_request.time);
         }
 
         return false;
