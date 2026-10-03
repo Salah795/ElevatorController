@@ -38,7 +38,8 @@ The elevator worker thread continuously:
 6. Reaches the original destination.
 7. Returns to waiting for the next request.
 
-The mutex protects the shared request structures, while it is released during physical elevator movement so that floor threads can add new requests concurrently.
+The mutex protects the shared request structures, while it is released during physical elevator movement so that 
+floor threads can add new requests concurrently.
 
 ### 3. Floor
 
