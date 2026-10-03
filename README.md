@@ -83,7 +83,8 @@ Therefore, for a building with N floors, the system uses:
 N + 1 worker threads
 ```
 
-The Floor threads act as producers of elevator requests, while the Elevator thread acts as the consumer and scheduler of those requests.
+The Floor threads act as producers of elevator requests, while the Elevator thread acts as the consumer and scheduler 
+of those requests.
 
 ---
 
@@ -92,11 +93,14 @@ The Floor threads act as producers of elevator requests, while the Elevator thre
 Synchronization between the floor threads and the elevator thread is implemented using:
 
 * `std::mutex` — protects shared elevator request data.
-* `std::condition_variable` — allows the elevator thread to sleep while there are no requests and wake up when a floor adds a new request.
+* `std::condition_variable` — allows the elevator thread to sleep while there are no requests and wake up when a floor 
+* adds a new request.
 * `std::priority_queue` — determines which pending request should be processed next.
-* `std::unordered_map` — keeps track of currently active requests and allows the elevator to detect requests encountered while traveling.
+* `std::unordered_map` — keeps track of currently active requests and allows the elevator to detect requests 
+* encountered while traveling.
 
-Overall, the architecture separates input handling (Floor), request scheduling and movement (Elevator), and system initialization and ownership (ElevatorSystem).
+Overall, the architecture separates input handling (Floor), request scheduling and movement (Elevator), and system 
+initialization and ownership (ElevatorSystem).
 
 ---
 
