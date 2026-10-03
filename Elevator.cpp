@@ -46,7 +46,8 @@ void Elevator::run() {
                 this->current_direction = Direction::DOWN;
             }
 
-            for (int floor = current_floor; floor != next_floor; floor += static_cast<int>(this->current_direction)) {
+            for (int floor = current_floor; floor != next_floor;
+                floor += static_cast<int>(this->current_direction)) {
                 if ((this->floors_map.find(floor) != this->floors_map.end()) &&
                     (this->floors_map[floor].direction == this->current_direction)) {
                     this->floors_map.erase(floor);
