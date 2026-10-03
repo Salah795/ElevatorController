@@ -9,12 +9,12 @@
 
 
 class ElevatorSystem {
-    Elevator *elevator;
-    std::vector<Floor*> floors;
+    Elevator elevator;
+    std::vector<std::unique_ptr<Floor>> floors;
 
 public:
     explicit ElevatorSystem(int floors_number);
-    void start() const;
+    void start();
 };
 
 
