@@ -232,7 +232,8 @@ Handling button presses must be asynchronous because the system cannot know when
 Each floor therefore waits for its own button events independently.
 The elevator also uses a std::condition_variable so that its worker thread sleeps when there are no pending 
 requests and is asynchronously notified when a new request is added.
-The actual elevator movement is sequential because there is only one elevator. Requests can be received concurrently 
-while it is moving, but the elevator itself processes its movement one floor at a time according to the selected 
-request and direction.
-Therefore, the overall design uses N + 1 worker threads for N floors: one elevator thread and one thread per floor.
+
+---
+
+# How would change your solution if there are two elevators in the building?
+
