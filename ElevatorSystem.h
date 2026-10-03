@@ -7,9 +7,8 @@
 #include "Elevator.h"
 #include "Floor.h"
 
-// TODO SHOULD DO A RECHECK ON THIS CLASS AND IT'S METHODS IMPLEMENTATION.
+
 class ElevatorSystem {
-private:
     Elevator *elevator;
     std::vector<Floor*> floors;
 

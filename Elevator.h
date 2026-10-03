@@ -34,7 +34,6 @@ struct ComparePriority {
 
 class Elevator
 {
-private:
     int timer;
     int people_number;
     std::thread worker;

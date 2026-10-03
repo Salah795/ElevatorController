@@ -5,11 +5,9 @@
 #ifndef ELEVATORCONTROLLER_FLOOR_H
 #define ELEVATORCONTROLLER_FLOOR_H
 #include "Elevator.h"
-#include "Hardware.h"
 
 
 class Floor {
-private:
     bool up_flag;
     bool down_flag;
     const int number;
