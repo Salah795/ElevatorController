@@ -38,5 +38,5 @@ Button Hardware::WaitForButtonPress(int floor_number) {
      * then returns which button was pressed.
      */
 
-    return Button::DOWN;
+    return DOWN;
 }
