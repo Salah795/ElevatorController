@@ -14,7 +14,7 @@
 
 #include "Hardware.h"
 
-
+// TODO need to deal with the issue of free elevator.
 enum class Direction {
     DOWN = -1,
     NON = 0,
