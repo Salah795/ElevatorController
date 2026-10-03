@@ -247,8 +247,7 @@ The system would contain two Elevator objects, each with its own worker thread a
 The Floor objects would send their requests to the ElevatorSystem instead of directly to a specific elevator.
 
 When an external request is received, the ElevatorSystem would select the most suitable elevator based on factors 
-such as whether the elevator is free, its current floor, and its current direction. In particular, 
-a free elevator that is closest to the requested floor would normally be selected.
+such as whether the elevator is free, its current floor, and its current direction.
 After selecting an elevator, the request would be assigned to that elevator, which would then process it using the same
 request-priority and movement logic as in the single-elevator solution.
 
