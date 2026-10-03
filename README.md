@@ -223,7 +223,6 @@ The following operations can run in parallel:
 
 All floor threads can wait for button presses simultaneously.
 A floor can submit a new request while the elevator is physically moving.
-Multiple floors can generate requests concurrently.
 The elevator can continue its movement while floor threads are waiting for or generating new requests.
 
 The shared request data is protected by std::mutex to prevent concurrent access from causing inconsistencies.
