@@ -4,8 +4,11 @@
 
 #ifndef ELEVATORCONTROLLER_HARDWARE_H
 #define ELEVATORCONTROLLER_HARDWARE_H
-#include "Elevator.h"
 
+
+enum Button {
+    UP, DOWN
+};
 
 namespace  Hardware
 {
@@ -13,6 +16,8 @@ namespace  Hardware
     int GetCurrentElevatorVelocity();
     void OpenDoors();
     int GoToFloor(int floor_numbers);
+    Button WaitForButtonPress(int floor_number);
+
 
 };
 

@@ -31,3 +31,12 @@ int Hardware::GoToFloor(int floor_numbers) {
     return 0;
 
 }
+
+Button Hardware::WaitForButtonPress(int floor_number) {
+    /*
+     * blocks the calling thread until either UP or DOWN is pressed,
+     * then returns which button was pressed.
+     */
+
+    return Button::DOWN;
+}
