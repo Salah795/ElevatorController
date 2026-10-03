@@ -193,3 +193,14 @@ Requests are prioritized according to their timestamp:
 
 * Inside-elevator requests have higher priority than outside requests.
 * Among requests of the same type, the older request has higher priority.
+
+
+---
+
+# Is there some problem with the presented logic? Do you have any suggestion how to improve it?
+
+I think there is a problem with handling floor requests when the elevator is not free.
+I think that in all cases, we should process the requests. However, when there is a request from inside the elevator, 
+it should always have higher priority than an outside request, even if the outside request was made earlier.
+In this case, the elevator will go to the floor requested from outside only after all the internal requests have 
+been completed, unless the outside request is on the way and in the same direction as the elevator.
