@@ -14,8 +14,8 @@ namespace  Hardware
 {
     int GetCurrentElevatorFloor();
     int GetCurrentElevatorVelocity();
-    void OpenDoors();
-    int GoToFloor(int floor_numbers);
+    void StopElevator();
+    void GoToFloor(int floor_numbers);
     Button WaitForButtonPress(int floor_number);
 
 

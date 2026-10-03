@@ -14,7 +14,7 @@
 
 #include "Hardware.h"
 
-// TODO need to deal with the issue of free elevator.
+// TODO need to deal with the direction synchronization issue.
 enum class Direction {
     DOWN = -1,
     NON = 0,
@@ -28,6 +28,19 @@ struct Request {
 };
 
 struct ComparePriority {
+    /*
+     * Defines the priority order of elevator requests.
+     * Requests made from inside the elevator have negative timestamps,
+     * while requests made from outside have positive timestamps.
+     * The priority queue therefore processes:
+     *    1. Inside requests before outside requests.
+     *    2. Among requests of the same type, the oldest request first,
+     *       determined by the absolute value of the timestamp.
+     *
+     * This allows requests from passengers already inside the elevator
+     * to take priority over new external requests.
+     */
+
     bool operator() (const Request& first_request, const Request& second_request) const {
         if (first_request.time < 0 && second_request.time > 0) {
             return true;
@@ -45,7 +58,6 @@ struct ComparePriority {
 class Elevator
 {
     int timer;
-    int people_number;
     std::thread worker;
     std::mutex data_mutex;
     Direction current_direction;
@@ -54,12 +66,11 @@ class Elevator
     std::priority_queue<Request, std::vector<Request>, ComparePriority> floors_priority;
 
 public:
-    Elevator(): timer(0), people_number(0), current_direction(Direction::NON) {}
+    Elevator(): timer(0), current_direction(Direction::NON) {}
     void add_destination(int floor_number, bool inside, Direction direction);
     Direction get_direction() const {return this->current_direction;}
     void start() {this->worker = std::thread(&Elevator::run, this);}
     int get_floor() {return Hardware::GetCurrentElevatorFloor();}
-    bool is_free() const {return this->people_number == 0;}
     void run();
 };
 
