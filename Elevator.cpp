@@ -4,6 +4,13 @@
 
 #include "Elevator.h"
 
+
+void Elevator::start() {
+    if (!this->worker.joinable()) {
+        this->worker = std::thread(&Elevator::run, this);
+    }
+}
+
 void Elevator::add_destination(const int floor_number, const bool inside, const Direction direction) {
     /*
      * Adds a new destination request to the elevator.

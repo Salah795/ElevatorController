@@ -69,7 +69,7 @@ public:
     Elevator(): timer(0), current_direction(Direction::NON) {}
     void add_destination(int floor_number, bool inside, Direction direction);
     Direction get_direction() const {return this->current_direction;}
-    void start() {this->worker = std::thread(&Elevator::run, this);}
+    void start();
     int get_floor() {return Hardware::GetCurrentElevatorFloor();}
     void run();
 };

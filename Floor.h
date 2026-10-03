@@ -8,16 +8,13 @@
 
 
 class Floor {
-    bool up_flag;
-    bool down_flag;
     const int number;
     std::thread worker;
     Elevator& elevator;
 
 public:
-    Floor(const int floor_number, Elevator& elevator):
-    up_flag(false), down_flag(false), number(floor_number), elevator(elevator) {}
-    void start() {this->worker = std::thread(&Floor::run, this);}
+    Floor(const int floor_number, Elevator& elevator): number(floor_number), elevator(elevator) {}
+    void start();
     void run() const;
 };
 
