@@ -7,8 +7,18 @@
 #include "Elevator.h"
 #include "Floor.h"
 
-// TODO SHOULD RECHECK THIS CLASS AND EVERYTHING RELATED TO IT.
+
 class ElevatorSystem {
+    /**
+ * ElevatorSystem is responsible for managing the elevator and all floors
+ * in the building. It creates the required components, connects each
+ * floor to the elevator, and starts their worker threads.
+ *
+ * The class is implemented as a Singleton to ensure that only one
+ * ElevatorSystem instance exists and serves as the central controller
+ * of the entire system.
+ */
+
     Elevator elevator;
     std::vector<std::unique_ptr<Floor>> floors;
     explicit ElevatorSystem(int floors_number);
