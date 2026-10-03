@@ -195,7 +195,6 @@ Requests are prioritized according to their timestamp:
 * Inside-elevator requests have higher priority than outside requests.
 * Among requests of the same type, the older request has higher priority.
 
-
 ---
 
 # Is there some problem with the presented logic? Do you have any suggestion how to improve it?
@@ -205,3 +204,35 @@ I think that in all cases, we should process the requests. However, when there i
 it should always have higher priority than an outside request, even if the outside request was made earlier.
 In this case, the elevator will go to the floor requested from outside only after all the internal requests have 
 been completed, unless the outside request is on the way and in the same direction as the elevator.
+
+---
+
+# What threads do you need? 
+
+The system requires one worker thread for the elevator and one worker thread for each floor.
+
+---
+
+# What Can Run in Parallel?
+
+The following operations can run in parallel:
+
+All floor threads can wait for button presses simultaneously.
+A floor can submit a new request while the elevator is physically moving.
+Multiple floors can generate requests concurrently.
+The elevator can continue its movement while floor threads are waiting for or generating new requests.
+
+The shared request data is protected by std::mutex to prevent concurrent access from causing inconsistencies.
+
+---
+
+# What Must Be Asynchronous?
+
+Handling button presses must be asynchronous because the system cannot know when a passenger will press a button. 
+Each floor therefore waits for its own button events independently.
+The elevator also uses a std::condition_variable so that its worker thread sleeps when there are no pending 
+requests and is asynchronously notified when a new request is added.
+The actual elevator movement is sequential because there is only one elevator. Requests can be received concurrently 
+while it is moving, but the elevator itself processes its movement one floor at a time according to the selected 
+request and direction.
+Therefore, the overall design uses N + 1 worker threads for N floors: one elevator thread and one thread per floor.
