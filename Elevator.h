@@ -5,6 +5,7 @@
 #ifndef ELEVATORCONTROLLER_ELEVATOR_H
 #define ELEVATORCONTROLLER_ELEVATOR_H
 
+#include <cmath>
 #include <queue>
 #include <vector>
 #include <unordered_map>
@@ -28,7 +29,16 @@ struct Request {
 
 struct ComparePriority {
     bool operator() (const Request& first_request, const Request& second_request) const {
-        return (first_request.time < second_request.time) && !(first_request.time >= 0 && second_request.time < 0);
+        if (first_request.time < 0 && second_request.time > 0) {
+            return true;
+        }
+
+        if ((first_request.time < 0 && second_request.time < 0) ||
+            (first_request.time > 0 && second_request.time > 0)) {
+            return abs(first_request.time) < abs(second_request.time);
+        }
+
+        return false;
     }
 };
 

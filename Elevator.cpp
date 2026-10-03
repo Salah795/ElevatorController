@@ -13,7 +13,7 @@ void Elevator::add_destination(const int floor_number, const bool inside, const 
     else {
         const int current_floor = Hardware::GetCurrentElevatorFloor();
         const int current_velocity = Hardware::GetCurrentElevatorVelocity();
-        if ((current_floor == floor_number) && (current_velocity == 0)) {
+        if (current_floor == floor_number && current_velocity == 0) {
             Hardware::OpenDoors();
             this->data_mutex.unlock();
             return;
